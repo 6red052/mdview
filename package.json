@@ -1,0 +1,37 @@
+{
+  "name": "mdview",
+  "version": "1.0.0",
+  "private": true,
+  "description": "零依赖的本地 Markdown 查看器：双击 .md 用浏览器打开。Zero-dependency local Markdown viewer.",
+  "license": "MIT",
+  "type": "module",
+  "os": [
+    "win32"
+  ],
+  "keywords": [
+    "markdown",
+    "viewer",
+    "windows",
+    "zero-dependency",
+    "localhost",
+    "file-association"
+  ],
+  "scripts": {
+    "start": "node server.mjs",
+    "installer": "powershell -NoProfile -ExecutionPolicy Bypass -File ./windows/install.ps1",
+    "portable": "powershell -NoProfile -ExecutionPolicy Bypass -File ./windows/portable-install.ps1",
+    "build:exe": "node tools/build-exe.mjs",
+    "test": "node tools/run-tests.mjs",
+    "test:exit": "node tools/run-tests.mjs --exit",
+    "test:render": "node tools/render-check.mjs 7799",
+    "test:bom": "node tools/bom-repro.mjs",
+    "test:recents": "node tools/recents-check.mjs 7799",
+    "test:xss": "node tools/xss-fuzz.mjs",
+    "test:security": "node tools/security-check.mjs 7799"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "comment": "运行 mdview 本身零依赖。只有打包单文件 exe 时才需要 Node 25.5+（用官方 --build-sea），见 tools/build-exe.mjs。",
+  "devDependencies": {}
+}

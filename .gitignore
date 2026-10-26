@@ -1,0 +1,25 @@
+# 运行时数据（不要提交）
+*.log
+server.json
+recent.json
+verify.txt
+verify.txt.err
+
+# 构建产物与依赖
+node_modules/
+.build/
+dist/
+*.zip
+
+# 临时文件
+.msg.tmp
+.git-commit-msg.tmp
+commit-msg.txt
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
