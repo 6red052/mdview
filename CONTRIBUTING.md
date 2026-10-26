@@ -7,7 +7,7 @@
 
 无需执行 `npm install`：零依赖是硬性要求，`package.json` 中没有运行时依赖。
 
-```powershell
+```text
 node server.mjs examples\test-fixture.md     # 打开示例文档
 npm test                                     # 启动临时服务 → 运行全部回归 → 自动关闭
 ```
