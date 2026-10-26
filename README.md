@@ -1,5 +1,7 @@
 # mdview
 
+[![test](https://github.com/6red052/mdview/actions/workflows/test.yml/badge.svg)](https://github.com/6red052/mdview/actions/workflows/test.yml)
+
 零依赖的本地 Markdown 查看器：双击 `.md` 用浏览器打开，排版、代码高亮、目录树、图片全部正常。
 
 > **English** — A zero-dependency, read-only Markdown viewer for Windows. Double-click a `.md`

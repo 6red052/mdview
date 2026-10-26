@@ -38,9 +38,11 @@
 以下内容受本机环境限制，无法验证：
 
 - **单文件 exe 的实际打包。** 本机 Node 24 不支持 `--build-sea`（需要 25.5+），`tools/build-exe.mjs` 只经过静态审查与自检逻辑检查；95 MB exe / 37 MB zip 的实际产物尚未验证。
-- **GitHub Actions 实际运行。** `windows-latest`、Node 20/22/24 与 `npm test` 的组合在逻辑上应可通过，但尚未实际执行。
 - **`rundll32 url.dll,FileProtocolHandler` 对 `.exe` / `.lnk` 的实际行为。** 审查时以替身程序验证代码路径，未实际执行 payload；此外 `/api/open` 仅放行图片、媒体、PDF、压缩包与文本，SVG 及可执行类型均被拒绝。
 - **多用户机器、远程桌面、端口转发** 场景下的行为（见 SECURITY.md 的「不在防护范围内」）。
+
+GitHub Actions 已在首次推送时实际运行：`windows-latest` 上 Node 20 / 22 / 24 三个作业全部通过（语法检查与 `npm test`），结果见
+[Actions 运行记录](https://github.com/6red052/mdview/actions)。
 
 ## 四、问题报告
 
