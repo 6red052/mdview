@@ -53,9 +53,10 @@
 - 便携版 zip 补上 `mdview-silent.vbs`（此前遗漏，安装后会退化为短暂的黑色窗口）；zip 清单缺文件改为直接失败。
 - 安装脚本在写 per-user `ProgId` 前，同时检查已有的 `FileExts\ProgId`、`UserChoice` 和
   `HKCU\Software\Classes\<ext>` 默认值，不再可能在已有默认程序时抢默认。
-- 安装脚本会一并复制 `docs/`、SECURITY/KNOWN-ISSUES/CHANGELOG/CONTRIBUTING/LICENSE
+- 安装脚本会一并复制 SECURITY、KNOWN-ISSUES、CHANGELOG、CONTRIBUTING、LICENSE
   （安装后 README 里的链接不再断），不再安装无用的 `portable-install.ps1`；
   停止正在运行的服务时会给出提示。
+- 移除 `docs/使用说明与排障.md`；其中的故障排查内容改由 GitHub issue 与 KNOWN-ISSUES 承接。
 - Node 版本要求提到 20+（18 已 EOL，CI 只覆盖 20/22/24）。
 - 测试子套件加 180 秒超时，避免 BOM 那种死循环把 CI 拖到 job 上限。
 

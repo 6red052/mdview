@@ -15,8 +15,7 @@
 - **零常驻** — 所有文档共用**同一个**后台服务（开 100 个 md 也只有 1 个进程）；关掉浏览器标签页约 45 秒后它自己退出，兜底空闲 15 分钟退出。
 - **可回滚** — 只改 `HKCU`（当前用户），不需要管理员；卸载脚本按备份还原 `ProgId` 与「打开方式」条目（`UserChoice` 由 Windows 哈希保护，脚本改不了）。
 
-> 完整使用说明与故障排查：[`docs/使用说明与排障.md`](docs/使用说明与排障.md)
-> 还知道哪些不足、哪些是故意不做的：[`KNOWN-ISSUES.md`](KNOWN-ISSUES.md)
+> 已知问题与设计取舍：[`KNOWN-ISSUES.md`](KNOWN-ISSUES.md)
 
 ## 与现有工具的区别
 
@@ -194,7 +193,6 @@ mdview/
 ├─ tools/tab-exit-check.mjs      关闭标签页后的自动退出（约 60 秒）
 ├─ tools/lib/template.mjs        从 server.mjs 抠内嵌脚本的公共实现
 ├─ tools/dev/                    排障用的一次性脚本（不参与 CI）
-├─ docs/使用说明与排障.md         详细文档
 ├─ examples/                     示例文档（含一个带 BOM 的样本）
 ├─ CHANGELOG.md / CONTRIBUTING.md / SECURITY.md / KNOWN-ISSUES.md
 └─ package.json

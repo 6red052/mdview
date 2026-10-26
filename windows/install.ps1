@@ -208,16 +208,6 @@ foreach ($f in $files) {
         Record "copied $f"
     }
 }
-# docs/ 也带上：README 里的「使用说明与排障」链接才不会在安装后变成死链。
-$docsSrc = Join-Path $SourceDir 'docs'
-if (Test-Path $docsSrc) {
-    $docsDst = Join-Path $InstallDir 'docs'
-    if (-not (Test-Path $docsDst)) { New-Item -ItemType Directory -Path $docsDst -Force | Out-Null }
-    Get-ChildItem -LiteralPath $docsSrc -File | ForEach-Object {
-        Copy-Item -LiteralPath $_.FullName -Destination $docsDst -Force
-    }
-    Record 'copied docs\'
-}
 $windowsSrc = Join-Path $SourceDir 'windows'
 if (Test-Path $windowsSrc) {
     $windowsDst = Join-Path $InstallDir 'windows'
