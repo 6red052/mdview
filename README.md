@@ -48,7 +48,7 @@ Mac / Linux 上能跑起来的部分只有 `node server.mjs <文件>` 这个只�
 
 ## 快速开始
 
-```text
+```powershell
 # 安装（不需要管理员权限）
 powershell -NoProfile -ExecutionPolicy Bypass -File windows\install.ps1
 
@@ -91,7 +91,7 @@ mdview stop            停止后台服务
 
 ## 安装参数
 
-```text
+```powershell
 -InstallDir 'D:\tools\mdview'   换安装位置（默认 %LOCALAPPDATA%\mdview）
 -Default                        额外弹出「打开方式」让你设为默认
 -AddPath                        把安装目录加入用户 Path，之后可直接敲 mdview
@@ -109,7 +109,7 @@ mdview stop            停止后台服务
 
 ### 打包单文件版
 
-```text
+```powershell
 # 1) 取一份支持 --build-sea 的官方 Node 作为构建基线（不覆盖你系统里的 Node）
 npm install node@26 --no-save --prefix .build/nodebin
 
@@ -162,7 +162,7 @@ node tools/build-exe.mjs
 
 ### 本地验证命令
 
-```text
+```powershell
 # 1. 断网后打开文档，功能应完全正常
 # 2. 确认服务只在回环地址监听
 netstat -ano | findstr ":7717"   # 端口被占时会顺延；实际端口见 %LOCALAPPDATA%\mdview\server.json
@@ -202,14 +202,14 @@ mdview/
 
 ## 回归测试
 
-```text
+```powershell
 npm test          # 启动临时服务 → 渲染 / 最近打开 / 隐形字符 / XSS fuzz / 安全 → 自动关闭
 npm run test:exit # 额外验证「关闭标签页约 45 秒后服务自动退出」（约一分钟）
 ```
 
 也可单独运行其中一组：
 
-```text
+```powershell
 node server.mjs serve --port 7799 examples\test-fixture.md
 node tools\render-check.mjs 7799
 node tools\recents-check.mjs 7799
