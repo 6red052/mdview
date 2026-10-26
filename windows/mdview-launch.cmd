@@ -6,5 +6,9 @@ set "HERE=%~dp0"
 set "MDVIEW-NODE="
 if exist "%HERE%mdview-node.txt" set /p MDVIEW-NODE=<"%HERE%mdview-node.txt"
 if not defined MDVIEW-NODE set "MDVIEW-NODE=node"
-"%MDVIEW-NODE%" "%HERE%server.mjs" %*
+rem Installed layout: server.mjs sits next to this file.
+rem Repo layout: this file lives in windows\, server.mjs one level up.
+set "SERVER=%HERE%server.mjs"
+if not exist "%SERVER%" set "SERVER=%HERE%..\server.mjs"
+"%MDVIEW-NODE%" "%SERVER%" %*
 endlocal

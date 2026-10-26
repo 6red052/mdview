@@ -2,7 +2,7 @@
  * 验证"带 BOM 的文件能正常打开"—— 走运行中的服务，用前端真实渲染器。
  *
  *   node server.mjs serve --port 7801 examples\bom-sample.md
- *   node tools/bom-e2e-check.mjs 7801 examples\bom-sample.md
+ *   node tools/check/bom-e2e.mjs 7801 examples\bom-sample.md
  *
  * 这个用例是为了回归 E16（1.0.0 的 BOM 死循环白屏）。旧版跑它会在
  * 拉取页面后永久卡住，所以外面必须配超时。

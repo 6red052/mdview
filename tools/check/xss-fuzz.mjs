@@ -1,7 +1,7 @@
 /*
  * 渲染器的 XSS / 链接注入回归：25 组攻击性输入，逐条检查产出的 HTML。
  *
- *   node tools/xss-fuzz.mjs
+ *   node tools/check/xss-fuzz.mjs
  *
  * 判定方式不是"抓关键字"，而是解析产出的标签：
  *   1. 不允许出现 script / iframe / object / embed / base / form 这些标签；
@@ -13,9 +13,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
-import { createGrabber } from './lib/template.mjs';
+import { createGrabber } from '../lib/template.mjs';
 
-const serverPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'server.mjs');
+const serverPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'server.mjs');
 const src = fs.readFileSync(serverPath, 'utf8');
 const grabTemplate = createGrabber(src);
 

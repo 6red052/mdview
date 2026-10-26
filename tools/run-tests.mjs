@@ -1,7 +1,7 @@
 /*
  * One command for every regression that does not need a browser.
  *
- *   node tools/run-tests.mjs          # render + recents + invisible chars
+ *   node tools/run-tests.mjs          # render + recents + invisible chars + xss + security
  *   node tools/run-tests.mjs --exit   # also "closing the tab retires the server" (~60s)
  *
  * Boots a private server on a free port with its own MDVIEW_HOME under the OS
@@ -80,12 +80,12 @@ async function main() {
 
   let failures = 0;
   const suites = [
-    ['render', 'render-check.mjs', [String(port)]],
-    ['recents', 'recents-check.mjs', [String(port)]],
-    ['bom', 'bom-repro.mjs', []],
-    ['bom-e2e', 'bom-e2e-check.mjs', [String(port), path.join(ROOT, 'examples', 'bom-sample.md')]],
-    ['xss-fuzz', 'xss-fuzz.mjs', []],
-    ['security', 'security-check.mjs', [String(port)]],
+    ['render', 'check/render.mjs', [String(port)]],
+    ['recents', 'check/recents.mjs', [String(port)]],
+    ['bom', 'check/bom.mjs', []],
+    ['bom-e2e', 'check/bom-e2e.mjs', [String(port), path.join(ROOT, 'examples', 'bom-sample.md')]],
+    ['xss-fuzz', 'check/xss-fuzz.mjs', []],
+    ['security', 'check/security.mjs', [String(port)]],
   ];
 
   try {
@@ -110,7 +110,7 @@ async function main() {
 
     if (WITH_EXIT) {
       console.log('--- tab-exit (waits up to 75s) ---');
-      const code = await run('tab-exit-check.mjs', [String(port)]);
+      const code = await run('check/tab-exit.mjs', [String(port)]);
       if (code !== 0) {
         failures++;
         console.error('--- tab-exit failed (exit ' + code + ') ---\n');

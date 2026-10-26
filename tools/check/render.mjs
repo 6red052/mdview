@@ -4,7 +4,7 @@
  * minimal window stub, then prints and inspects the produced HTML.
  *
  *   node server.mjs serve --port 7799 examples\test-fixture.md
- *   node tools/render-check.mjs [port] [fixture-path]
+ *   node tools/check/render.mjs [port] [fixture-path]
  */
 
 import path from 'node:path';
@@ -12,7 +12,7 @@ import { fileURLToPath } from 'node:url';
 
 const port = Number(process.argv[2] || 7799);
 const base = 'http://127.0.0.1:' + port;
-const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const fixture = process.argv[3]
   ? path.resolve(process.argv[3])
   : path.join(repoRoot, 'examples', 'test-fixture.md');

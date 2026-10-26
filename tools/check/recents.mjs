@@ -2,7 +2,7 @@
  * 专注模式 / 最近打开 —— 端到端验证。
  *
  *   node server.mjs serve --port 7799 examples\test-fixture.md
- *   node tools/recents-check.mjs 7799
+ *   node tools/check/recents.mjs 7799
  *
  * 覆盖：
  *   1. 页面带有专注模式与「打开 ▾」下拉所需的 DOM

@@ -1,7 +1,7 @@
 /*
  * 安全回归：把已经修掉的攻击面变成断言，防止以后再被改回去。
  *
- *   node tools/security-check.mjs <port>
+ *   node tools/check/security.mjs <port>
  *
  * 覆盖：
  *   · Host 头缺失 / 伪造 → 403
@@ -26,7 +26,7 @@ import http from 'node:http';
 import net from 'node:net';
 import { fileURLToPath } from 'node:url';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const port = Number(process.argv[2] || 0);
 const results = [];
 const t = (name, ok, extra) => {

@@ -178,24 +178,28 @@ curl.exe "http://127.0.0.1:7717/api/file?f=C:/Windows/win.ini"
 ```
 mdview/
 ├─ server.mjs                    单文件服务端 + CLI（零依赖）
-├─ mdview-launch.cmd             终端启动脚本
-├─ mdview-silent.vbs             文件关联调用的无窗口启动器
-├─ windows/install.ps1           源码版安装 / 卸载（HKCU，无需管理员）
-├─ windows/portable-install.ps1  单文件版安装 / 卸载（纯 ASCII，任何代码页可读）
-├─ tools/build-exe.mjs           打包单文件 exe（--build-sea）
-├─ tools/run-tests.mjs           一条命令运行全部回归
-├─ tools/render-check.mjs        渲染回归（31 项断言，跑的是真实发出去的脚本）
-├─ tools/bom-repro.mjs           隐形字符（BOM 等）回归
-├─ tools/bom-e2e-check.mjs       带 BOM 文件走完整服务链路的回归（E16）
-├─ tools/recents-check.mjs       专注模式 / 最近打开回归
-├─ tools/xss-fuzz.mjs            25 组攻击性输入的 XSS 回归（28 项断言）
-├─ tools/security-check.mjs      安全回归（Host / 类型白名单 / 状态端点 / /asset / junction / 仓库卫生）
-├─ tools/tab-exit-check.mjs      关闭标签页后的自动退出（约 60 秒）
-├─ tools/lib/template.mjs        从 server.mjs 抠内嵌脚本的公共实现
-├─ tools/dev/                    排障用的一次性脚本（不参与 CI）
+├─ package.json
+├─ windows/                      仅源码版安装需要
+│  ├─ install.ps1                安装 / 卸载（HKCU，无需管理员）
+│  ├─ portable-install.ps1       单文件版安装 / 卸载（纯 ASCII，任何代码页可读）
+│  ├─ mdview-launch.cmd          终端启动脚本
+│  └─ mdview-silent.vbs          文件关联调用的无窗口启动器
+├─ tools/
+│  ├─ build-exe.mjs              打包单文件 exe（--build-sea）
+│  ├─ run-tests.mjs              一条命令运行全部回归
+│  ├─ check/                     回归套件
+│  │  ├─ render.mjs              渲染回归（31 项断言，跑的是真实发出去的脚本）
+│  │  ├─ recents.mjs             专注模式 / 最近打开回归
+│  │  ├─ bom.mjs                 隐形字符（BOM 等）回归
+│  │  ├─ bom-e2e.mjs             带 BOM 文件走完整服务链路的回归
+│  │  ├─ xss-fuzz.mjs            25 组攻击性输入的 XSS 回归（28 项断言）
+│  │  ├─ security.mjs            安全回归（Host / 类型白名单 / 状态端点 / junction / 仓库卫生）
+│  │  └─ tab-exit.mjs            关闭标签页后的自动退出（约 60 秒）
+│  ├─ lib/template.mjs           从 server.mjs 抠内嵌脚本的公共实现
+│  └─ dev/                       排障用的一次性脚本（不参与 CI）
 ├─ examples/                     示例文档（含一个带 BOM 的样本）
-├─ CHANGELOG.md / CONTRIBUTING.md / SECURITY.md / KNOWN-ISSUES.md
-└─ package.json
+├─ .github/workflows/test.yml    CI
+└─ CHANGELOG.md / CONTRIBUTING.md / SECURITY.md / KNOWN-ISSUES.md
 ```
 
 ## 回归测试
@@ -209,11 +213,11 @@ npm run test:exit # 额外验证「关闭标签页约 45 秒后服务自动退�
 
 ```powershell
 node server.mjs serve --port 7799 examples\test-fixture.md
-node tools\render-check.mjs 7799
-node tools\recents-check.mjs 7799
-node tools\bom-repro.mjs
-node tools\xss-fuzz.mjs
-node tools\security-check.mjs 7799
+node tools\check\render.mjs 7799
+node tools\check\recents.mjs 7799
+node tools\check\bom.mjs
+node tools\check\xss-fuzz.mjs
+node tools\check\security.mjs 7799
 ```
 
 CI 在 GitHub Actions 的 `windows-latest` 上跑 Node 20 / 22 / 24。

@@ -198,7 +198,7 @@ if ($nodeMajor -lt 20) {
 # 3. copy the app (windows\ comes along so uninstall stays available)
 # README 里链接到的几份文档一起带上，安装后它们才不会变成死链。
 $files = @(
-    'server.mjs', 'package.json', 'mdview-launch.cmd', 'mdview-silent.vbs',
+    'server.mjs', 'package.json',
     'README.md', 'SECURITY.md', 'KNOWN-ISSUES.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'LICENSE'
 )
 foreach ($f in $files) {
@@ -209,12 +209,22 @@ foreach ($f in $files) {
     }
 }
 $windowsSrc = Join-Path $SourceDir 'windows'
+# 启动器在 windows\ 下，安装到应用根目录（文件关联与自检都指向根目录）。
+foreach ($launcher in 'mdview-launch.cmd', 'mdview-silent.vbs') {
+    $src = Join-Path $windowsSrc $launcher
+    if (Test-Path $src) {
+        Copy-Item -LiteralPath $src -Destination (Join-Path $InstallDir $launcher) -Force
+        Record "copied $launcher"
+    }
+}
+
 if (Test-Path $windowsSrc) {
     $windowsDst = Join-Path $InstallDir 'windows'
     if (-not (Test-Path $windowsDst)) { New-Item -ItemType Directory -Path $windowsDst -Force | Out-Null }
     # 只带 install.ps1（卸载要用）；portable-install.ps1 是单文件版用的，
     # 在源码安装里跑必然报错，装了只会让人误点。
-    Get-ChildItem -LiteralPath $windowsSrc -File | Where-Object { $_.Name -ne 'portable-install.ps1' } | ForEach-Object {
+    $skipInWindows = @('portable-install.ps1', 'mdview-launch.cmd', 'mdview-silent.vbs')
+    Get-ChildItem -LiteralPath $windowsSrc -File | Where-Object { $skipInWindows -notcontains $_.Name } | ForEach-Object {
         Copy-Item -LiteralPath $_.FullName -Destination $windowsDst -Force
     }
     Record 'copied windows\ (uninstall script)'

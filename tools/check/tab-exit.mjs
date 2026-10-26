@@ -1,7 +1,7 @@
 /*
  * Verifies the tab-driven exit behaviour against a running mdview server.
  *
- *   node tools/tab-exit-check.mjs [port]
+ *   node tools/check/tab-exit.mjs [port]
  *
  * Sequence:
  *   1. open a page            -> server must report 1 live tab
@@ -13,7 +13,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const port = Number(process.argv[2] || 7799);
 const base = 'http://127.0.0.1:' + port;
 const fixture = process.argv[3] || path.join(repoRoot, 'examples', 'test-fixture.md');

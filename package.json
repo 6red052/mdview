@@ -23,11 +23,11 @@
     "build:exe": "node tools/build-exe.mjs",
     "test": "node tools/run-tests.mjs",
     "test:exit": "node tools/run-tests.mjs --exit",
-    "test:render": "node tools/render-check.mjs 7799",
-    "test:bom": "node tools/bom-repro.mjs",
-    "test:recents": "node tools/recents-check.mjs 7799",
-    "test:xss": "node tools/xss-fuzz.mjs",
-    "test:security": "node tools/security-check.mjs 7799"
+    "test:render": "node tools/check/render.mjs 7799",
+    "test:bom": "node tools/check/bom.mjs",
+    "test:recents": "node tools/check/recents.mjs 7799",
+    "test:xss": "node tools/check/xss-fuzz.mjs",
+    "test:security": "node tools/check/security.mjs 7799"
   },
   "engines": {
     "node": ">=20"

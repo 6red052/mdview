@@ -1,15 +1,15 @@
 /*
  * 最小复现 BOM 死循环：
- *   node tools/bom-repro.mjs
+ *   node tools/check/bom.mjs
  */
 
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
-import { createGrabber } from './lib/template.mjs';
+import { createGrabber } from '../lib/template.mjs';
 
-const serverPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'server.mjs');
+const serverPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'server.mjs');
 const src = fs.readFileSync(serverPath, 'utf8');
 const grabTemplate = createGrabber(src);
 const sandbox = { window: null, console };

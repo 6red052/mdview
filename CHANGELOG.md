@@ -40,11 +40,11 @@
 
 ### 工程
 
-- 新增 `tools/security-check.mjs`（30 项断言）并接入 `npm test` 与 CI：Host 校验、打开类型
+- 新增 `tools/check/security.mjs`（30 项断言）并接入 `npm test` 与 CI：Host 校验、打开类型
   白名单、状态变更端点（session / keepalive / bye）、`/asset` 响应头、目录链接、junction
   越界，以及 `install.ps1` 必须带 UTF-8 BOM、`portable-install.ps1` 必须纯 ASCII
   （这两项此前出现过静默回归）。
-- 新增 `tools/xss-fuzz.mjs`（25 组攻击性输入 + 3 条正常性断言）：不是抓关键字，而是解析产出
+- 新增 `tools/check/xss-fuzz.mjs`（25 组攻击性输入 + 3 条正常性断言）：不是抓关键字，而是解析产出
   的标签与属性，断言没有 script/iframe/object 且 href/src 不是危险协议（`file:` 也一并丢弃）。
 - 目录树遍历加上限（6000 条目 / 20000 目录项 / 8 秒），超大目录或 junction 不再卡住几十秒。
 - 清理死代码：`fileToken`、`rotateTokens()`、`taskFirst`、不可达的 `data:image` 分支、
